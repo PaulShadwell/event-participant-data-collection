@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration QR Code | Aquis Capital</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* QR Print page specific styles */
+        .qr-print-page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: white;
+        }
+        .qr-print-page .header {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 1.5rem;
+        }
+        .qr-container {
+            position: relative;
+            margin: 2rem 0;
+            width: 280px;
+            height: 280px;
+        }
+        .qr-container .qrcode {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 280px;
+            height: 280px;
+        }
+        .qr-container .qrcode canvas,
+        .qr-container .qrcode img,
+        .qr-container .qrcode table {
+            width: 280px !important;
+            height: 280px !important;
+        }
+        .qr-logo-overlay {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 22%;
+            min-width: 40px;
+            max-width: 60px;
+            background: white;
+            padding: 8%;
+            border-radius: 8px;
+            box-sizing: content-box;
+        }
+        .qr-logo-overlay img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .qr-label {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--aquis-navy, #0d1b2a);
+        }
+        .qr-url {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 0.95rem;
+            color: var(--aquis-text-muted, #5a6c7d);
+        }
+        @media print {
+            body { background: white !important; }
+            .qr-print-page { padding: 1rem !important; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="qr-print-page">
+        <header class="header no-print">
+            <a href="https://www.aquis-capital.com" target="_blank" rel="noopener" class="logo-link">
+                <img src="https://aquis-capital.com/assets/img/colored-logo.svg" alt="Aquis Capital" class="logo">
+            </a>
+        </header>
+
+        <div class="qr-container">
+            <div id="qrcode" class="qrcode"></div>
+            <div class="qr-logo-overlay">
+                <img src="https://aquis-capital.com/assets/img/colored-logo.svg" alt="Aquis Capital">
+            </div>
+        </div>
+
+        <p class="qr-label">Scan to register for our event</p>
+        <p class="qr-url">https://events.aquis-capital.com</p>
+
+        <button onclick="window.print()" class="submit-btn no-print" style="margin-top: 2rem; max-width: 200px;">
+            Print QR Code
+        </button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            new QRCode(document.getElementById('qrcode'), {
+                text: 'https://events.aquis-capital.com',
+                width: 280,
+                height: 280,
+                colorDark: '#0d1b2a',
+                colorLight: '#ffffff'
+            });
+        });
+    </script>
+</body>
+</html>

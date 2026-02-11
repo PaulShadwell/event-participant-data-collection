@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Registration | Aquis Capital</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page-wrap">
+        <header class="header">
+            <a href="https://www.aquis-capital.com" target="_blank" rel="noopener" class="logo-link">
+                <img src="https://aquis-capital.com/assets/img/colored-logo.svg" alt="Aquis Capital" class="logo">
+            </a>
+        </header>
+
+        <main class="main">
+            <div class="form-card">
+                <h1 class="title">Event Registration</h1>
+                <p class="subtitle">Please enter your details to register for our event</p>
+
+                <form id="registration-form" class="form" novalidate>
+                    <div class="form-group">
+                        <label for="fullName">Full Name <span class="required">*</span></label>
+                        <input 
+                            type="text" 
+                            id="fullName" 
+                            name="fullName" 
+                            placeholder="Enter your full name" 
+                            required
+                            autocomplete="name"
+                        >
+                        <span class="error-message" id="fullName-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address <span class="required">*</span></label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            placeholder="Enter your email address" 
+                            required
+                            autocomplete="email"
+                        >
+                        <span class="error-message" id="email-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            name="phone" 
+                            placeholder="Enter your phone number"
+                            autocomplete="tel"
+                        >
+                        <span class="error-message" id="phone-error"></span>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" id="submit-btn" class="submit-btn">
+                            <span class="btn-text">Submit Registration</span>
+                            <span class="btn-loading" aria-hidden="true">Submitting...</span>
+                        </button>
+                    </div>
+
+                    <div id="success-message" class="success-message" role="alert" hidden>
+                        Thank you! Your registration has been submitted successfully.
+                    </div>
+                    <div id="error-message" class="error-message-box" role="alert" hidden>
+                        An error occurred. Please try again later.
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; <span id="year"></span> Aquis Capital AG. All rights reserved.</p>
+            <p class="footer-link"><a href="qr-print.html">Print QR Code</a></p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

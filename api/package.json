@@ -1,0 +1,14 @@
+{
+  "name": "event-participant-api",
+  "version": "1.0.0",
+  "description": "API for event participant registration - CSV and email",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.0.0",
+    "@azure/storage-blob": "^12.19.0",
+    "@sendgrid/mail": "^8.1.0"
+  }
+}

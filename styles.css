@@ -1,0 +1,242 @@
+/* Aquis Capital Brand Colors - matching aquis-capital.com */
+:root {
+    --aquis-navy: #0d1b2a;
+    --aquis-navy-light: #1b263b;
+    --aquis-gold: #c9a227;
+    --aquis-gold-light: #e6c95c;
+    --aquis-gray: #415a77;
+    --aquis-gray-light: #778da9;
+    --aquis-bg: #f8f9fa;
+    --aquis-white: #ffffff;
+    --aquis-text: #2c3e50;
+    --aquis-text-muted: #5a6c7d;
+    --aquis-error: #c0392b;
+    --aquis-success: #27ae60;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, var(--aquis-bg) 0%, #e9ecef 100%);
+    color: var(--aquis-text);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+.page-wrap {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.header {
+    padding: 1.5rem 2rem;
+    background: var(--aquis-navy);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.logo-link {
+    display: inline-block;
+}
+
+.logo {
+    height: 40px;
+    width: auto;
+    display: block;
+}
+
+/* Main content */
+.main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+}
+
+.form-card {
+    background: var(--aquis-white);
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(13, 27, 42, 0.12);
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 480px;
+}
+
+.title {
+    margin: 0 0 0.5rem;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--aquis-navy);
+}
+
+.subtitle {
+    margin: 0 0 2rem;
+    color: var(--aquis-text-muted);
+    font-size: 0.95rem;
+}
+
+/* Form */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.form-group label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--aquis-text);
+}
+
+.required {
+    color: var(--aquis-error);
+}
+
+.form-group input {
+    padding: 0.75rem 1rem;
+    border: 2px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input::placeholder {
+    color: var(--aquis-gray-light);
+}
+
+.form-group input:hover {
+    border-color: var(--aquis-gray-light);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--aquis-gold);
+    box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.2);
+}
+
+.form-group input.invalid {
+    border-color: var(--aquis-error);
+}
+
+.form-group input.valid {
+    border-color: var(--aquis-success);
+}
+
+.error-message {
+    font-size: 0.85rem;
+    color: var(--aquis-error);
+    min-height: 1.25rem;
+}
+
+/* Submit button */
+.form-actions {
+    margin-top: 0.5rem;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, var(--aquis-gold) 0%, var(--aquis-gold-light) 100%);
+    color: var(--aquis-navy);
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.2s;
+}
+
+.submit-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(201, 162, 39, 0.4);
+}
+
+.submit-btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.submit-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.btn-loading {
+    display: none;
+}
+
+.submit-btn.loading .btn-text {
+    display: none;
+}
+
+.submit-btn.loading .btn-loading {
+    display: inline;
+}
+
+/* Messages */
+.success-message {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #d4edda;
+    color: #155724;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+.error-message-box {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: #f8d7da;
+    color: #721c24;
+    border-radius: 8px;
+    font-size: 0.95rem;
+}
+
+/* Footer */
+.footer {
+    padding: 1rem 2rem;
+    background: var(--aquis-navy);
+    color: var(--aquis-gray-light);
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+.footer p {
+    margin: 0;
+}
+
+.footer-link {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+}
+
+.footer-link a {
+    color: var(--aquis-gold-light);
+    text-decoration: none;
+}
+
+.footer-link a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 520px) {
+    .form-card {
+        padding: 1.5rem;
+    }
+    
+    .header, .footer {
+        padding: 1rem;
+    }
+}
