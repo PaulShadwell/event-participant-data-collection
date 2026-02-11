@@ -113,7 +113,10 @@
 
         if (!response.ok) {
             const errorData = await response.json().catch(() => ({}));
-            throw new Error(errorData.error || `Server error: ${response.status}`);
+            const msg = errorData.detail
+                ? `${errorData.error}: ${errorData.detail}`
+                : (errorData.error || `Server error: ${response.status}`);
+            throw new Error(msg);
         }
 
         return response.json();

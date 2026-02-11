@@ -27,13 +27,13 @@ async function appendToCsv(participant) {
   await containerClient.createIfNotExists();
 
   let csvContent = '';
-  const blobClient = containerClient.getBlobClient(CSV_BLOB);
+  const blockBlobClient = containerClient.getBlockBlobClient(CSV_BLOB);
 
   try {
-    const downloadResponse = await blobClient.download();
+    const downloadResponse = await blockBlobClient.download();
     csvContent = await streamToString(downloadResponse.readableStreamBody);
   } catch (err) {
-    if (err.statusCode === 404) {
+    if (err.statusCode === 404 || err.code === 'BlobNotFound') {
       csvContent = 'Timestamp,Full Name,Email,Phone\n';
     } else {
       throw err;
@@ -44,7 +44,8 @@ async function appendToCsv(participant) {
   const row = `${escapeCsvField(timestamp)},${escapeCsvField(participant.fullName)},${escapeCsvField(participant.email)},${escapeCsvField(participant.phone)}\n`;
   csvContent += row;
 
-  await blobClient.upload(csvContent, csvContent.length, { overwrite: true });
+  const buffer = Buffer.from(csvContent, 'utf8');
+  await blockBlobClient.uploadData(buffer, { overwrite: true });
 }
 
 async function streamToString(readableStream) {
@@ -132,7 +133,10 @@ app.http('submit', {
       context.log.error('CSV write error:', err);
       return {
         status: 500,
-        jsonBody: { error: 'Failed to save registration data' },
+        jsonBody: {
+          error: 'Failed to save registration data',
+          detail: err.message || String(err),
+        },
       };
     }
 
@@ -143,7 +147,10 @@ app.http('submit', {
       context.log.error('Email send error:', err);
       return {
         status: 500,
-        jsonBody: { error: 'Registration saved but email notification failed' },
+        jsonBody: {
+          error: 'Registration saved but email notification failed',
+          detail: err.message || String(err),
+        },
       };
     }
 

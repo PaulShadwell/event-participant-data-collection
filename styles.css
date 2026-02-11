@@ -36,8 +36,8 @@ body {
 /* Header */
 .header {
     padding: 1.5rem 2rem;
-    background: var(--aquis-navy);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    background: #e9ecef;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .logo-link {

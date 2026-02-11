@@ -53,7 +53,7 @@ Event-Participant-Data-Collection/
 ### 3. Create Azure Storage Account
 
 1. Create a **Storage Account**
-2. Create a container named `event-participants` (or the API will create it on firstrun)
+2. Create a container named `event-participants` (or the API will create it on first run)
 3. Copy the **Connection string** (under Access keys)
 
 ### 4. SendGrid Setup
