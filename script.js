@@ -73,8 +73,13 @@
             email.classList.add('valid');
         }
 
-        // Phone is optional - no validation needed
-        if (phone.value.trim()) {
+        // Phone validation
+        const phoneValue = phone.value.trim();
+        if (!phoneValue) {
+            phoneError.textContent = 'Please enter your phone number';
+            phone.classList.add('invalid');
+            isValid = false;
+        } else {
             phone.classList.add('valid');
         }
 

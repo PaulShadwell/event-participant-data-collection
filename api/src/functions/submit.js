@@ -105,10 +105,10 @@ app.http('submit', {
     }
 
     const { fullName, email, phone } = participant;
-    if (!fullName || !email) {
+    if (!fullName || !email || !phone) {
       return {
         status: 400,
-        jsonBody: { error: 'Full name and email are required' },
+        jsonBody: { error: 'Full name, email, and phone number are required' },
       };
     }
 
@@ -123,7 +123,7 @@ app.http('submit', {
     const data = {
       fullName: String(fullName).trim(),
       email: String(email).trim(),
-      phone: phone ? String(phone).trim() : '',
+      phone: String(phone).trim(),
     };
 
     try {
