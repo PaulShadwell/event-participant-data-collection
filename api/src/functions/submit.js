@@ -144,12 +144,16 @@ app.http('submit', {
       await sendEmail(data);
       context.log('Email sent successfully');
     } catch (err) {
+      const sendGridDetail = err.response?.body
+        ? JSON.stringify(err.response.body)
+        : err.message || String(err);
       context.log.error('Email send error:', err);
+      context.log.error('SendGrid response:', sendGridDetail);
       return {
         status: 500,
         jsonBody: {
           error: 'Registration saved but email notification failed',
-          detail: err.message || String(err),
+          detail: sendGridDetail,
         },
       };
     }

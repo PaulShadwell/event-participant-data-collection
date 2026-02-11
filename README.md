@@ -117,6 +117,31 @@ Matches Aquis Capital branding:
 - Light gray: `#f8f9fa`
 - Text: `#2c3e50`
 
+## Troubleshooting
+
+### CSV saves but no email received
+
+1. **Check the form error message** – After the next failed submission, the form will show SendGrid’s error (e.g. sender not verified).
+
+2. **Verify sender in SendGrid**
+   - [SendGrid Dashboard](https://app.sendgrid.com) → Settings → Sender Authentication
+   - Either verify a Single Sender (email) or authenticate your domain
+   - The `SENDGRID_FROM_EMAIL` in Azure must match a verified sender
+
+3. **Verify Application settings**
+   - Azure Portal → Static Web App → Configuration → Application settings
+   - Confirm `SENDGRID_API_KEY` and `SENDGRID_FROM_EMAIL` are set correctly
+
+4. **Check SendGrid Activity**
+   - SendGrid → Activity → view recent deliveries
+   - Shows accepted, delivered, bounced, or blocked emails
+
+5. **Check Azure Function logs**
+   - Azure Portal → Static Web App → Functions → select your function → Monitor → Log stream
+   - Or: Deployment Center → Logs → view build/runtime logs
+
+6. **Check spam** – Look in the spam folder for events@aquis-capital.com
+
 ## License
 
 Proprietary – Aquis Capital AG
