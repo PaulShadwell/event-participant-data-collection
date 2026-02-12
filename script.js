@@ -14,8 +14,27 @@
     // Email validation regex (RFC 5322 compliant, simplified)
     const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+    const companyInput = document.getElementById('company');
+    const privateCheckbox = document.getElementById('privateIndividual');
+
     // Set current year in footer
     document.getElementById('year').textContent = new Date().getFullYear();
+
+    // "Private Individual" checkbox toggles the company text field
+    privateCheckbox.addEventListener('change', function () {
+        if (this.checked) {
+            companyInput.value = 'Private Individual';
+            companyInput.disabled = true;
+            companyInput.classList.remove('invalid');
+            companyInput.classList.add('valid');
+            document.getElementById('company-error').textContent = '';
+        } else {
+            companyInput.value = '';
+            companyInput.disabled = false;
+            companyInput.classList.remove('valid');
+            companyInput.focus();
+        }
+    });
 
     /**
      * Validate email address
@@ -36,16 +55,18 @@
         const fullName = document.getElementById('fullName');
         const email = document.getElementById('email');
         const phone = document.getElementById('phone');
+        const company = document.getElementById('company');
 
         const fullNameError = document.getElementById('fullName-error');
         const emailError = document.getElementById('email-error');
         const phoneError = document.getElementById('phone-error');
+        const companyError = document.getElementById('company-error');
 
         // Reset states
-        [fullName, email, phone].forEach(el => {
+        [fullName, email, phone, company].forEach(el => {
             el.classList.remove('invalid', 'valid');
         });
-        [fullNameError, emailError, phoneError].forEach(el => {
+        [fullNameError, emailError, phoneError, companyError].forEach(el => {
             el.textContent = '';
         });
 
@@ -81,6 +102,16 @@
             isValid = false;
         } else {
             phone.classList.add('valid');
+        }
+
+        // Company validation
+        const companyValue = company.value.trim();
+        if (!companyValue) {
+            companyError.textContent = 'Please enter your company name or select Private Individual';
+            company.classList.add('invalid');
+            isValid = false;
+        } else {
+            company.classList.add('valid');
         }
 
         return isValid;
@@ -143,6 +174,7 @@
             fullName: document.getElementById('fullName').value.trim(),
             email: document.getElementById('email').value.trim(),
             phone: document.getElementById('phone').value.trim(),
+            company: document.getElementById('company').value.trim(),
         };
 
         submitBtn.disabled = true;
@@ -152,6 +184,8 @@
             await submitForm(formData);
             showSuccess();
             form.reset();
+            companyInput.disabled = false;
+            privateCheckbox.checked = false;
             document.querySelectorAll('.form-group input').forEach(el => {
                 el.classList.remove('valid', 'invalid');
             });

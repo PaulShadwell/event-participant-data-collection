@@ -34,14 +34,14 @@ async function appendToCsv(participant) {
     csvContent = await streamToString(downloadResponse.readableStreamBody);
   } catch (err) {
     if (err.statusCode === 404 || err.code === 'BlobNotFound') {
-      csvContent = 'Timestamp,Full Name,Email,Phone\n';
+      csvContent = 'Timestamp,Full Name,Email,Phone,Company\n';
     } else {
       throw err;
     }
   }
 
   const timestamp = new Date().toISOString();
-  const row = `${escapeCsvField(timestamp)},${escapeCsvField(participant.fullName)},${escapeCsvField(participant.email)},${escapeCsvField(participant.phone)}\n`;
+  const row = `${escapeCsvField(timestamp)},${escapeCsvField(participant.fullName)},${escapeCsvField(participant.email)},${escapeCsvField(participant.phone)},${escapeCsvField(participant.company)}\n`;
   csvContent += row;
 
   const buffer = Buffer.from(csvContent, 'utf8');
@@ -68,12 +68,13 @@ async function sendEmail(participant) {
     to: EMAIL_TO,
     from: process.env.SENDGRID_FROM_EMAIL || 'noreply@aquis-capital.com',
     subject: `Event Registration: ${participant.fullName}`,
-    text: `New event registration received:\n\nFull Name: ${participant.fullName}\nEmail: ${participant.email}\nPhone: ${participant.phone}\n\nTimestamp: ${new Date().toISOString()}`,
+    text: `New event registration received:\n\nFull Name: ${participant.fullName}\nEmail: ${participant.email}\nPhone: ${participant.phone}\nCompany: ${participant.company}\n\nTimestamp: ${new Date().toISOString()}`,
     html: `
       <h2>New Event Registration</h2>
       <p><strong>Full Name:</strong> ${participant.fullName}</p>
       <p><strong>Email:</strong> ${participant.email}</p>
       <p><strong>Phone:</strong> ${participant.phone || 'Not provided'}</p>
+      <p><strong>Company:</strong> ${participant.company}</p>
       <p><em>Received: ${new Date().toISOString()}</em></p>
     `,
   };
@@ -104,11 +105,11 @@ app.http('submit', {
       };
     }
 
-    const { fullName, email, phone } = participant;
-    if (!fullName || !email || !phone) {
+    const { fullName, email, phone, company } = participant;
+    if (!fullName || !email || !phone || !company) {
       return {
         status: 400,
-        jsonBody: { error: 'Full name, email, and phone number are required' },
+        jsonBody: { error: 'Full name, email, phone number, and company are required' },
       };
     }
 
@@ -124,6 +125,7 @@ app.http('submit', {
       fullName: String(fullName).trim(),
       email: String(email).trim(),
       phone: String(phone).trim(),
+      company: String(company).trim(),
     };
 
     try {

@@ -104,7 +104,9 @@ body {
     color: var(--aquis-error);
 }
 
-.form-group input {
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"] {
     padding: 0.75rem 1rem;
     border: 2px solid #e2e8f0;
     border-radius: 8px;
@@ -112,26 +114,66 @@ body {
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.form-group input::placeholder {
+/* Company field */
+.company-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--aquis-text);
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--aquis-gold);
+    cursor: pointer;
+}
+
+.form-group input[type="text"]::placeholder,
+.form-group input[type="email"]::placeholder,
+.form-group input[type="tel"]::placeholder {
     color: var(--aquis-gray-light);
 }
 
-.form-group input:hover {
+.form-group input[type="text"]:hover,
+.form-group input[type="email"]:hover,
+.form-group input[type="tel"]:hover {
     border-color: var(--aquis-gray-light);
 }
 
-.form-group input:focus {
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="tel"]:focus {
     outline: none;
     border-color: var(--aquis-gold);
     box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.2);
 }
 
-.form-group input.invalid {
+.form-group input[type="text"].invalid,
+.form-group input[type="email"].invalid,
+.form-group input[type="tel"].invalid {
     border-color: var(--aquis-error);
 }
 
-.form-group input.valid {
+.form-group input[type="text"].valid,
+.form-group input[type="email"].valid,
+.form-group input[type="tel"].valid {
     border-color: var(--aquis-success);
+}
+
+.form-group input[type="text"]:disabled {
+    background-color: #f0f0f0;
+    color: var(--aquis-text-muted);
+    cursor: not-allowed;
 }
 
 .error-message {

@@ -59,6 +59,25 @@
                         <span class="error-message" id="phone-error"></span>
                     </div>
 
+                    <div class="form-group">
+                        <label for="company">Company <span class="required">*</span></label>
+                        <div class="company-field">
+                            <input 
+                                type="text" 
+                                id="company" 
+                                name="company" 
+                                placeholder="Enter your company name" 
+                                required
+                                autocomplete="organization"
+                            >
+                            <label class="checkbox-label">
+                                <input type="checkbox" id="privateIndividual">
+                                <span>Private Individual</span>
+                            </label>
+                        </div>
+                        <span class="error-message" id="company-error"></span>
+                    </div>
+
                     <div class="form-actions">
                         <button type="submit" id="submit-btn" class="submit-btn">
                             <span class="btn-text">Submit Registration</span>
